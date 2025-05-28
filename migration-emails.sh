@@ -236,7 +236,7 @@ else
 fi
 
 # Solicita ao operador o nome do domínio cujas contas serão migradas.
-read -rp $'\n🌐 Qual o domínio que deseja migrar (ex: aguardidanoticia.com.br)? ' DOMINIO_EMAIL
+read -rp $'\n🌐 Qual o domínio que deseja migrar (ex: batata.com.br)? ' DOMINIO_EMAIL
 # Pede ao operador que informe o domínio, salvando a resposta em `DOMINIO_EMAIL`.
 
 # Define os caminhos possíveis para os arquivos de e-mail:
@@ -360,61 +360,53 @@ read -rp $'\n🔁 Pressione [Enter] para iniciar a migração das contas acima o
 # ENTER → continua | CTRL+C → cancela
 
 # === PARTE 5: Quais caixas serão migradas ===
-# Esta seção permite ao operador definir quais pastas internas (caixas) de cada conta de e-mail devem ser incluídas na migração.
-# Por padrão, uma conta de e-mail no cPanel usa "cur" e "new" para a Caixa de Entrada, e tem outras pastas como .Sent, .Trash, etc.
+# Esta seção define automaticamente as caixas internas de cada conta a serem migradas.
+# Caixa de Entrada é sempre incluída. O operador pode ignorar algumas caixas padrão.
+# Caixas personalizadas serão migradas automaticamente.
 
 echo -e "\n📂 Agora vamos definir quais caixas (pastas internas) serão migradas em cada conta."
-# Informa ao operador que o próximo passo será escolher as pastas internas (caixas) da conta que serão migradas.
+# Exibe uma mensagem indicando que o próximo passo será a definição das caixas de e-mail a migrar.
 
-# Explicação didática para o usuário
+# Explicação didática para o operador
 echo -e "\n🔎 Cada conta de e-mail possui várias pastas. Por padrão, as principais são:"
-echo "   - Caixa de Entrada  → cur e new"
-echo "   - Enviados          → .Sent"
-echo "   - Rascunhos         → .Drafts"
-echo "   - Lixeira           → .Trash"
-echo "   - Spam / Lixo       → .Junk ou .spam"
-# Mostra ao operador uma explicação amigável das principais pastas que compõem a estrutura de uma conta de e-mail no cPanel.
+echo "   - Caixa de Entrada  → cur e new"      # Explica que a caixa de entrada está dividida em cur/new
+echo "   - Enviados          → .Sent"          # Enviados geralmente são salvos na pasta .Sent
+echo "   - Rascunhos         → .Drafts"        # Rascunhos salvos em .Drafts
+echo "   - Lixeira           → .Trash"         # Lixeira é .Trash
+echo "   - Spam / Lixo       → .Junk ou .spam" # Spam pode ser .Junk ou .spam dependendo do cliente
+echo -e "\n📌 O script sempre irá copiar os diretórios 'cur' e 'new' de cada pasta."
+# Informa que o conteúdo real das mensagens está nos diretórios 'cur' e 'new', que serão copiados.
 
-echo -e "\n📌 O script sempre irá copiar os diretórios 'cur' e 'new' de cada pasta escolhida."
-# Esclarece que, independentemente da pasta (ex: .Sent), o conteúdo que será migrado vem de `cur` e `new` dentro de cada uma.
+# Lista de caixas padrão para possível exclusão
+CAIXAS_PADRAO=(.Sent .Trash .Drafts .Junk .spam)
+# Define um array com as caixas padrão que o script reconhece e que podem ser ignoradas se o operador quiser.
 
-# Pergunta ao usuário quais caixas devem ser migradas (entrada livre, separada por espaço)
-read -rp $'\n✏️  Quais caixas você deseja migrar? (ex: .Sent .Trash .Drafts) \nPara migrar apenas a Caixa de Entrada, deixe em branco e pressione Enter: ' CAIXAS_PERSONALIZADAS
-# Aqui o script pede ao operador para digitar as pastas que quer migrar além da Caixa de Entrada.
-# Exemplo de entrada: `.Sent .Trash .Drafts`
-# O valor será salvo como string na variável `CAIXAS_PERSONALIZADAS`.
+# Pergunta ao usuário quais dessas deseja ignorar para TODAS as contas
+echo -e "\n🛑 Você pode optar por NÃO migrar algumas das caixas padrão abaixo:"
+for caixa in "${CAIXAS_PADRAO[@]}"; do
+    echo "   - $caixa"
+done
+# Imprime a lista das caixas padrão disponíveis, uma por linha, para que o operador saiba quais são opcionais.
 
-# Se o usuário não preencher nada, migramos apenas a caixa de entrada padrão
-if [ -z "$CAIXAS_PERSONALIZADAS" ]; then
-    # A opção `-z` testa se a variável está vazia.
-    # Se estiver vazia (ENTER foi pressionado sem nada), considera que o operador quer migrar apenas a Caixa de Entrada.
+read -rp $'\n✏️  Digite as caixas padrão que deseja ignorar (separadas por espaço), ou pressione [Enter] para migrar todas: ' IGNORADAS_INPUT
+# Pede ao operador que digite, em uma linha só, os nomes das caixas padrão que **não devem ser migradas**.
 
-    echo -e "\n📨 Apenas a Caixa de Entrada (cur e new) será migrada."
-    # Informa isso ao usuário.
+IFS=' ' read -r -a CAIXAS_IGNORADAS <<<"$IGNORADAS_INPUT"
+# Converte a string digitada em um array (separando pelos espaços), para facilitar a verificação posterior.
+# Exemplo: ".Trash .Junk" → CAIXAS_IGNORADAS[0]=.Trash, CAIXAS_IGNORADAS[1]=.Junk
 
-    CAIXAS_MIGRAR=()
-    # Inicializa `CAIXAS_MIGRAR` como um array vazio. O restante do script saberá que só "cur" e "new" da raiz devem ser migrados.
-else
-    # Se o usuário digitou algo, significa que há caixas extras a migrar.
+# Confirma a escolha com o operador
+echo -e "\n✅ As seguintes caixas padrão serão ignoradas:"
+for ignorada in "${CAIXAS_IGNORADAS[@]}"; do
+    echo "   - $ignorada"
+done
+# Exibe, linha a linha, as caixas que o operador decidiu ignorar.
 
-    # Converte a entrada do usuário em array
-    IFS=' ' read -r -a CAIXAS_MIGRAR <<<"$CAIXAS_PERSONALIZADAS"
-    # Divide a string da variável `CAIXAS_PERSONALIZADAS` em um array, com base nos espaços em branco.
-    # Exemplo: `.Sent .Trash` → `CAIXAS_MIGRAR[0]=.Sent`, `CAIXAS_MIGRAR[1]=.Trash`
+echo -e "\n📩 Todas as demais caixas padrão e personalizadas serão migradas automaticamente."
+# Informa que tudo o que não foi ignorado será copiado, inclusive caixas criadas manualmente pelo usuário.
 
-    # Mostra o resumo das caixas que serão migradas
-    echo -e "\n📤 Além da Caixa de Entrada, serão migradas as seguintes caixas:"
-    for caixa in "${CAIXAS_MIGRAR[@]}"; do
-        echo "   - $caixa"
-    done
-    # Faz um loop sobre o array `CAIXAS_MIGRAR` e imprime uma a uma.
-    # Isso permite ao operador revisar visualmente as pastas que indicou para migração.
-fi
-
-# Confirma antes de prosseguir
-read -rp $'\n🔁 Pressione [Enter] para continuar com a migração conforme as caixas escolhidas, ou CTRL+C para cancelar...'
-# Pausa a execução, dando ao operador uma chance final de revisar e cancelar se tiver informado algo errado.
-# ENTER → continua | CTRL+C → cancela
+read -rp $'\n🔁 Pressione [Enter] para continuar com a migração, ou CTRL+C para cancelar...'
+# Dá ao operador uma última chance de revisar ou cancelar a operação antes de continuar o script.
 
 # === PARTE 6: Preparação da transferência via rsync ===
 # Esta parte do script coleta os dados de acesso ao servidor de destino e testa a conexão SSH,
@@ -485,3 +477,62 @@ else
     # Caso o SSH retorne código de saída 0, a conexão foi bem-sucedida.
     # Informa ao operador que o ambiente está pronto para iniciar o processo de `rsync`.
 fi
+
+# === PARTE 7: Execução da migração via rsync ===
+# Esta etapa percorre as contas e caixas definidas, e executa o comando rsync para transferir os dados para o novo servidor.
+
+echo -e "\n🚚 Iniciando migração via rsync para cada conta e caixa selecionada..."
+
+for conta in "${CONTAS_MIGRAR[@]}"; do
+    echo -e "\n📤 Migrando conta: $conta@$DOMINIO_EMAIL"
+
+    # Define o caminho local da conta de origem
+    CONTA_PATH="$CAMINHO_FINAL/$conta"
+
+    # Cria array com caixas a serem migradas
+    CAIXAS_MIGRAR=("INBOX") # Caixa de entrada padrão
+
+    # Detecta caixas adicionais (pastas que começam com ponto)
+    for pasta in "$CONTA_PATH"/.*; do
+        nome=$(basename "$pasta")
+        [[ "$nome" == "." || "$nome" == ".." ]] && continue
+
+        # Verifica se a caixa está na lista de ignoradas
+        IGNORAR=false
+        for ignorada in "${CAIXAS_IGNORADAS[@]}"; do
+            [[ "$nome" == "$ignorada" ]] && IGNORAR=true && break
+        done
+
+        if [ "$IGNORAR" = false ]; then
+            CAIXAS_MIGRAR+=("$nome")
+        fi
+    done
+
+    # Executa o rsync da Caixa de Entrada (cur e new da raiz)
+    for subdir in cur new; do
+        ORIGEM="$CONTA_PATH/$subdir/"
+        DESTINO="/home/$USUARIO_EMAIL/mail/$DOMINIO_EMAIL/$conta/$subdir/"
+        echo "   ➜ rsync INBOX/$subdir"
+
+        sshpass -p "$DEST_SENHA" rsync -az -e "ssh -p $DEST_PORT -o StrictHostKeyChecking=no" \
+            "$ORIGEM" "$DEST_USER@$DEST_HOST:$DESTINO"
+    done
+
+    # Executa o rsync para cada caixa adicional
+    for caixa in "${CAIXAS_MIGRAR[@]}"; do
+        [[ "$caixa" == "INBOX" ]] && continue # Já migrada acima
+
+        for subdir in cur new; do
+            ORIGEM="$CONTA_PATH/$caixa/$subdir/"
+            DESTINO="/home/$USUARIO_EMAIL/mail/$DOMINIO_EMAIL/$conta/$caixa/$subdir/"
+            echo "   ➜ rsync $caixa/$subdir"
+
+            sshpass -p "$DEST_SENHA" rsync -az -e "ssh -p $DEST_PORT -o StrictHostKeyChecking=no" \
+                "$ORIGEM" "$DEST_USER@$DEST_HOST:$DESTINO"
+        done
+    done
+
+    echo "✅ Conta $conta migrada com sucesso."
+done
+
+echo -e "\n🏁 Migração concluída para todas as contas selecionadas."
