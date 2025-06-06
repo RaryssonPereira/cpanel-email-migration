@@ -209,7 +209,7 @@ read -rp $'\n🔁 Pressione [Enter] para iniciar a migração das contas acima o
 echo -e "\n🚀 Vamos configurar a conexão com o servidor de destino para iniciar a transferência."
 
 # Solicita o hostname ou IP do servidor destino
-read -rp $'\n🌐 Host ou IP do servidor de destino (ex: us129.serverdo.in): ' DEST_HOST
+read -rp $'\n🌐 Host ou IP do servidor de destino (ex: br69.exemplo): ' DEST_HOST
 
 # Solicita o usuário SSH do destino (ex: root)
 read -rp $'\n🔐 Usuário SSH do destino (ex: root): ' DEST_USER
