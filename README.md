@@ -31,3 +31,25 @@ Algumas dificuldades comuns que motivam a automação desse processo incluem:
   Utilizar scripts padronizados garante que o procedimento possa ser repetido de forma segura em diferentes clientes e situações, além de facilitar o suporte e a auditoria do processo de migração.
 
 Esses fatores tornam essencial a criação de ferramentas e rotinas automáticas, proporcionando um fluxo de trabalho mais confiável e produtivo para quem gerencia múltiplos ambientes Cpanel e precisa lidar com grandes volumes de e-mails.
+
+---
+
+## 🛬 Script `email-migration-destination.sh` — Execução no Servidor Destino  
+[🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-destination.sh)
+
+Este script deve ser executado **no servidor de destino**, ou seja, no ambiente para onde as contas de e-mail serão migradas. O principal objetivo é facilitar a importação das caixas de e-mail a partir do servidor de origem, mesmo em cenários onde não há acesso completo ou terminal disponível no Cpanel de origem.
+
+### **Por que executar a migração pelo destino?**
+
+Em muitos provedores de hospedagem compartilhada, o acesso ao terminal (SSH) é desativado ou fortemente restrito por questões de segurança. Mesmo quando há acesso, frequentemente ele é limitado, impedindo comandos como `rsync`, a instalação de utilitários como `byobu` ou `sshpass`, ou até mesmo transferências diretas entre servidores. Isso torna o processo de migração manual demorado, arriscado e suscetível a erros.
+
+Pensando nisso, o `email-migration-destination.sh` foi desenvolvido para contornar essas limitações, permitindo que **todo o processo de migração seja iniciado e controlado a partir do servidor destino**. Assim, não é necessário nenhum acesso especial no servidor de origem além das credenciais do painel Cpanel e, se permitido, do próprio protocolo IMAP.
+
+### **Principais vantagens:**
+
+- Elimina a necessidade de SSH ou terminal no servidor de origem.
+- Não exige permissões elevadas (root) para rodar.
+- Automatiza a busca e transferência das caixas de entrada (Inbox) e enviados (Sent) das contas de e-mail.
+- Reduz o risco de erros causados por limitações da hospedagem de origem.
+- Pode ser repetido ou adaptado para múltiplas contas ou domínios.
+
