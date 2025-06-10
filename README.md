@@ -16,8 +16,7 @@ Migrar apenas as contas de e-mail entre servidores Cpanel pode ser um grande des
 Algumas dificuldades comuns que motivam a automação desse processo incluem:
 
 - **Evitar o backup completo do Cpanel:**  
-  O backup tradicional do Cpanel gera um arquivo único contendo todos os dados do usuário (arquivos do site, bancos de dados, configurações, e-mails, etc). Muitas vezes, só é necessário migrar os e-mails, mas não o site, especialmente quando o site já foi migrado para um ambiente dedicado ou Cloud.  
-  Automação permite selecionar e migrar apenas as caixas de e-mail, sem levar arquivos desnecessários.
+  O backup tradicional do Cpanel gera um arquivo único contendo todos os dados do usuário (arquivos do site, bancos de dados, configurações, e-mails, etc). Muitas vezes, só é necessário migrar os e-mails, mas não o site, especialmente quando o site já foi migrado para um ambiente dedicado ou Cloud. Automação permite selecionar e migrar apenas as caixas de e-mail, sem levar arquivos desnecessários.
 
 - **Limitações de armazenamento e performance:**  
   Em ambientes Cpanel com grandes volumes de dados (por exemplo, 300GB a 500GB), o processo de backup via painel web pode ser extremamente demorado ou até inviável. É comum o processo de geração do arquivo `cpmove` falhar com timeout após algumas horas, tornando impossível concluir a exportação pelo painel.
