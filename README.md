@@ -15,20 +15,11 @@ Migrar apenas as contas de e-mail entre servidores Cpanel pode ser complicado, p
 
 Principais motivos para automatizar:
 
-- **Evitar o backup completo do Cpanel:**  
-  O backup tradicional do Cpanel gera um arquivo único contendo todos os dados do usuário (arquivos do site, bancos de dados, configurações, e-mails, etc). Muitas vezes, só é necessário migrar os e-mails, mas não o site, especialmente quando o site já foi migrado para um ambiente dedicado ou Cloud. Automação permite selecionar e migrar apenas as caixas de e-mail, sem levar arquivos desnecessários.
-
-- **Limitações de armazenamento e performance:**  
-  Em ambientes Cpanel com grandes volumes de dados (por exemplo, 300GB a 500GB), o processo de backup via painel web pode ser extremamente demorado ou até inviável. É comum o processo de geração do arquivo `cpmove` falhar com timeout após algumas horas, tornando impossível concluir a exportação pelo painel.
-
-- **Necessidade de atuação via terminal:**  
-  Por conta das limitações do painel, muitas migrações acabam exigindo o uso do terminal para transferir apenas as pastas e arquivos relevantes das contas de e-mail. Automatizar esse fluxo economiza tempo, minimiza erros humanos e permite um controle mais granular sobre o que está sendo migrado.
-
-- **Redução de indisponibilidade:**  
-  Scripts automatizados permitem migrar os dados com mais eficiência e agilidade, reduzindo o tempo de indisponibilidade para o cliente final.
-
-- **Repetibilidade e documentação:**  
-  Utilizar scripts padronizados garante que o procedimento possa ser repetido de forma segura em diferentes clientes e situações, além de facilitar o suporte e a auditoria do processo de migração.
+- **Evita o backup completo do Cpanel:** Permite migrar só os e-mails, sem transferir arquivos desnecessários do site.
+- **Melhora a performance e supera limitações:** Garante migração mesmo em ambientes com grandes volumes de dados, onde o backup do painel pode falhar.
+- **Uso do terminal facilita e reduz erros:** Automatizar o processo torna tudo mais rápido, seguro e sob controle.
+- **Menos indisponibilidade:** Scripts automáticos aceleram a migração e minimizam o tempo offline do cliente.
+- **Procedimento seguro e repetível:** Scripts documentados facilitam o suporte e podem ser reutilizados em várias situações.
 
 Assim, ferramentas automáticas tornam a rotina de migração muito mais eficiente e confiável para quem gerencia diversos Cpanels e grandes volumes de e-mail.
 
