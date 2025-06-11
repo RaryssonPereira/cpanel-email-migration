@@ -49,7 +49,7 @@ Pensando nisso, o `email-migration-destination.sh` foi desenvolvido para contorn
 
 - Elimina a necessidade de acessar o SSH/terminal do Cpanel de origem manualmente.
 - Não exige permissões root no servidor de origem; no servidor de destino, o ideal é rodar como root para garantir a correta importação dos dados.
-- Realiza a transferência completa de todas as caixas e dados das contas de e-mail, sem limitar a pastas específicas.
+- Realiza a transferência completa de todas as caixas e dados das contas de e-mail.
 - Reduz o risco de erros causados por limitações da hospedagem de origem.
 - Pode ser repetido ou adaptado para múltiplas contas ou domínios.
 
