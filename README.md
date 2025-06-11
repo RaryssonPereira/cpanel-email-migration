@@ -11,9 +11,9 @@ Analista de Desenvolvimento de Sistemas e Infraestrutura | Brasileiro 🇧🇷
 
 ## 🤔 Por que Automatizar a Migração de Contas de E-mail entre Servidores Cpanel?
 
-Migrar apenas as contas de e-mail entre servidores Cpanel pode ser um grande desafio, principalmente em cenários onde o site está hospedado em outro local (como um servidor Cloud) e você não deseja mover o ambiente inteiro.
+Migrar apenas as contas de e-mail entre servidores Cpanel pode ser complicado, principalmente quando o site já está em outro ambiente e não se deseja mover tudo.
 
-Algumas dificuldades comuns que motivam a automação desse processo incluem:
+Principais motivos para automatizar:
 
 - **Evitar o backup completo do Cpanel:**  
   O backup tradicional do Cpanel gera um arquivo único contendo todos os dados do usuário (arquivos do site, bancos de dados, configurações, e-mails, etc). Muitas vezes, só é necessário migrar os e-mails, mas não o site, especialmente quando o site já foi migrado para um ambiente dedicado ou Cloud. Automação permite selecionar e migrar apenas as caixas de e-mail, sem levar arquivos desnecessários.
@@ -30,7 +30,7 @@ Algumas dificuldades comuns que motivam a automação desse processo incluem:
 - **Repetibilidade e documentação:**  
   Utilizar scripts padronizados garante que o procedimento possa ser repetido de forma segura em diferentes clientes e situações, além de facilitar o suporte e a auditoria do processo de migração.
 
-Esses fatores tornam essencial a criação de ferramentas e rotinas automáticas, proporcionando um fluxo de trabalho mais confiável e produtivo para quem gerencia múltiplos ambientes Cpanel e precisa lidar com grandes volumes de e-mails.
+Assim, ferramentas automáticas tornam a rotina de migração muito mais eficiente e confiável para quem gerencia diversos Cpanels e grandes volumes de e-mail.
 
 ---
 
