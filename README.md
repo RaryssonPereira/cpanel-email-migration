@@ -26,7 +26,7 @@ Assim, ferramentas automáticas tornam a rotina de migração muito mais eficien
 ---
 
 ## 🛬 Script `email-migration-destination.sh` — Execução no Servidor Destino  
-[🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-destination.sh)
+[🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/destination/email-migration-destination.sh)
 
 Este script deve ser executado **no servidor de destino**, para onde as contas de e-mail serão migradas. Ele foi criado para facilitar a importação dos e-mails, mesmo quando o servidor de origem não oferece acesso ao terminal.
 
