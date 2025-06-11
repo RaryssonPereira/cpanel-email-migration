@@ -53,3 +53,30 @@ Pensando nisso, o `email-migration-destination.sh` foi desenvolvido para contorn
 - Reduz o risco de erros causados por limitações da hospedagem de origem.
 - Pode ser repetido ou adaptado para múltiplas contas ou domínios.
 
+---
+
+## 🚀 Script `email-migration-origin.sh` — Execução no Servidor de Origem  
+[🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-origin.sh)
+
+Este script deve ser executado **no servidor de origem**, ou seja, onde estão as contas de e-mail atualmente. Ele é recomendado para cenários em que você possui acesso ao terminal/SSH do Cpanel de origem, com permissões suficientes para instalar e rodar ferramentas no ambiente.
+
+### **O que conferir antes de usar o script**
+
+- **Acesso ao terminal/SSH:** Certifique-se de que o seu plano de hospedagem permite acesso ao terminal/SSH.  
+- **Permissão para usar `git clone`:** O ideal é que seja possível clonar este repositório diretamente via `git clone` no servidor. Caso contrário, você terá dificuldade para baixar e executar os scripts.
+- **Instalação dos utilitários necessários:** Recomendo verificar previamente se consegue instalar as ferramentas `byobu` e `sshpass`.  
+  - Essas ferramentas são importantes para garantir que a transferência será realizada de forma mais prática e robusta, evitando interrupções e facilitando o acompanhamento do processo.
+  - O próprio script já faz uma checagem automática dos utilitários e pergunta se você deseja utilizá-los, mas é bom conferir manualmente se você tem permissão para instalar pacotes no servidor.
+
+### **Como funciona o processo**
+
+O funcionamento é semelhante ao script de destino, porém neste caso a migração é **iniciada a partir do servidor de origem**: você envia (ou “empurra”) as contas de e-mail do servidor de origem para o servidor de destino, usando SSH/rsync para a transferência dos dados.
+
+### **Principais pontos:**
+- Execução no terminal do servidor de origem (onde estão as contas atualmente).
+- Garante flexibilidade para realizar transferências de grandes volumes de e-mails.
+- Permite o uso opcional de utilitários como `byobu` (para sessões persistentes) e `sshpass` (para automação do SSH).
+- Ótima opção para ambientes onde você tem mais controle ou acesso sobre o servidor de origem.
+
+
+
