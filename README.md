@@ -69,3 +69,19 @@ Diferente do script de destino, aqui a migração é **iniciada no servidor de o
 - Utilização opcional de `byobu` e `sshpass` para facilitar e tornar o processo mais seguro.
 - Indicado para ambientes onde você tem mais controle sobre o servidor de origem.
 
+---
+
+## ✅ Considerações finais
+
+Esses scripts foram criados para tornar a migração de contas de e-mail entre servidores Cpanel muito mais simples, rápida e confiável, especialmente em cenários com restrições de acesso ao terminal ou grandes volumes de dados.  
+
+Antes de executar qualquer um dos scripts, é altamente recomendado que você leia o guia detalhado correspondente ao fluxo que pretende usar:
+
+- [Guia de uso do script email-migration-destination.sh (migração iniciada no destino)](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-destination-guide.md)
+- [Guia de uso do script email-migration-origin.sh (migração iniciada na origem)](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-origin-guide.md)
+
+Esses guias apresentam o passo a passo de cada etapa do processo, dicas de preparação do ambiente e instruções para garantir uma migração segura.
+
+Caso encontre qualquer dúvida, sugestão ou melhoria, fique à vontade para abrir uma issue no repositório.
+
+Boas migrações!
