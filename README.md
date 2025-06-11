@@ -37,21 +37,23 @@ Esses fatores tornam essencial a criação de ferramentas e rotinas automáticas
 ## 🛬 Script `email-migration-destination.sh` — Execução no Servidor Destino  
 [🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-destination.sh)
 
-Este script deve ser executado **no servidor de destino**, ou seja, no ambiente para onde as contas de e-mail serão migradas. O principal objetivo é facilitar a importação das contas de e-mail a partir do servidor de origem, mesmo em cenários onde não há acesso completo ou terminal disponível no Cpanel de origem.
+Este script deve ser executado **no servidor de destino**, para onde as contas de e-mail serão migradas. Ele foi criado para facilitar a importação dos e-mails, mesmo quando o servidor de origem não oferece acesso ao terminal.
 
-### **Por que executar a migração pelo destino?**
+### **Antes de começar**
 
-Em muitos provedores de hospedagem compartilhada, o acesso ao terminal (SSH) é desativado ou fortemente restrito por questões de segurança. Mesmo quando há acesso, frequentemente ele é limitado, impedindo comandos como `rsync`, a instalação de utilitários como `byobu` ou `sshpass`, ou até mesmo transferências diretas entre servidores. Isso torna o processo de migração manual demorado, arriscado e suscetível a erros.
+O script verifica automaticamente se as ferramentas `byobu`, `sshpass` e `git clone` estão disponíveis, mas recomenda-se conferir previamente se você pode instalá-las no servidor de destino, evitando surpresas durante a migração.
 
-Pensando nisso, o `email-migration-destination.sh` foi desenvolvido para contornar essas limitações, permitindo que **todo o processo de migração seja iniciado e controlado a partir do servidor destino**. Assim, não é necessário nenhum acesso especial no servidor de origem além das credenciais do painel Cpanel. É importante ressaltar que o servidor de origem precisa aceitar conexões SSH para que o rsync funcione, mas você não precisa acessar o terminal/SSH do servidor de origem manualmente.
+### **Por que migrar pelo destino?**
+
+Muitos provedores não permitem acesso ao terminal no Cpanel de origem, dificultando transferências diretas. Com este script, todo o processo é iniciado do destino: basta que o servidor de origem aceite conexões SSH (usadas pelo `rsync`). Não é necessário acessar manualmente o terminal do Cpanel de origem.
 
 ### **Principais vantagens:**
 
-- Elimina a necessidade de acessar o SSH/terminal do Cpanel de origem manualmente.
-- Não exige permissões root no servidor de origem; no servidor de destino, o ideal é rodar como root para garantir a correta importação dos dados.
-- Realiza a transferência completa de todas as caixas e dados das contas de e-mail.
-- Reduz o risco de erros causados por limitações da hospedagem de origem.
-- Pode ser repetido ou adaptado para múltiplas contas ou domínios.
+- Não precisa acessar o terminal do Cpanel de origem.
+- Não exige root no servidor de origem; no destino, o recomendado é executar como root.
+- Transfere todas as caixas e dados das contas de e-mail.
+- Evita limitações comuns das hospedagens de origem.
+- Permite migração de múltiplas contas ou domínios.
 
 ---
 
