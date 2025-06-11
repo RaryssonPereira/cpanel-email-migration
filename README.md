@@ -60,25 +60,21 @@ Muitos provedores não permitem acesso ao terminal no Cpanel de origem, dificult
 ## 🚀 Script `email-migration-origin.sh` — Execução no Servidor de Origem  
 [🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-origin.sh)
 
-Este script deve ser executado **no servidor de origem**, ou seja, onde estão as contas de e-mail atualmente. Ele é recomendado para cenários em que você possui acesso ao terminal/SSH do Cpanel de origem, com permissões suficientes para instalar e rodar ferramentas no ambiente.
+Este script deve ser executado **no servidor de origem**, onde estão as contas de e-mail atualmente. É indicado para cenários em que você tem acesso ao terminal/SSH do Cpanel de origem, com permissão para instalar ferramentas.
 
-### **O que conferir antes de usar o script**
+### **Antes de usar**
 
-- **Acesso ao terminal/SSH:** Certifique-se de que o seu plano de hospedagem permite acesso ao terminal/SSH.  
-- **Permissão para usar `git clone`:** O ideal é que seja possível clonar este repositório diretamente via `git clone` no servidor. Caso contrário, você terá dificuldade para baixar e executar os scripts.
-- **Instalação dos utilitários necessários:** Recomendo verificar previamente se consegue instalar as ferramentas `byobu` e `sshpass`.  
-  - Essas ferramentas são importantes para garantir que a transferência será realizada de forma mais prática e robusta, evitando interrupções e facilitando o acompanhamento do processo.
-  - O próprio script já faz uma checagem automática dos utilitários e pergunta se você deseja utilizá-los, mas é bom conferir manualmente se você tem permissão para instalar pacotes no servidor.
+- Verifique se o acesso ao terminal/SSH está liberado no servidor de origem.
+- Confirme se é possível usar `git clone` para baixar o repositório.
+- Tente instalar previamente os utilitários `byobu` e `sshpass`. O script já checa e orienta sobre eles, mas é bom garantir que você consegue instalar pacotes no ambiente.
 
-### **Como funciona o processo**
+### **Como funciona**
 
-O funcionamento é semelhante ao script de destino, porém neste caso a migração é **iniciada a partir do servidor de origem**: você envia (ou “empurra”) as contas de e-mail do servidor de origem para o servidor de destino, usando SSH/rsync para a transferência dos dados.
+Diferente do script de destino, aqui a migração é **iniciada no servidor de origem**: você envia ("empurra") as contas de e-mail para o servidor de destino via SSH/rsync.
 
 ### **Principais pontos:**
-- Execução no terminal do servidor de origem (onde estão as contas atualmente).
-- Garante flexibilidade para realizar transferências de grandes volumes de e-mails.
-- Permite o uso opcional de utilitários como `byobu` (para sessões persistentes) e `sshpass` (para automação do SSH).
-- Ótima opção para ambientes onde você tem mais controle ou acesso sobre o servidor de origem.
-
-
+- Executado diretamente no servidor de origem.
+- Ideal para transferências de grandes volumes de e-mails.
+- Utilização opcional de `byobu` e `sshpass` para facilitar e tornar o processo mais seguro.
+- Indicado para ambientes onde você tem mais controle sobre o servidor de origem.
 
