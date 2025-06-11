@@ -49,7 +49,7 @@ Muitos provedores não permitem acesso ao terminal no Cpanel de origem, dificult
 ---
 
 ## 🚀 Script `email-migration-origin.sh` — Execução no Servidor de Origem  
-[🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-origin.sh)
+[🔗 Ver script no GitHub](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/origin/email-migration-origin.sh)
 
 Este script deve ser executado **no servidor de origem**, onde estão as contas de e-mail atualmente. É indicado para cenários em que você tem acesso ao terminal/SSH do Cpanel de origem, com permissão para instalar ferramentas.
 
@@ -77,8 +77,8 @@ Esses scripts foram criados para tornar a migração de contas de e-mail entre s
 
 Antes de executar qualquer um dos scripts, é altamente recomendado que você leia o guia detalhado correspondente ao fluxo que pretende usar:
 
-- [Guia de uso do script email-migration-destination.sh (migração iniciada no destino)](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-destination-guide.md)
-- [Guia de uso do script email-migration-origin.sh (migração iniciada na origem)](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/email-migration-origin-guide.md)
+- [Guia de uso do script email-migration-destination.sh (migração iniciada no destino)](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/destination/guide.md)
+- [Guia de uso do script email-migration-origin.sh (migração iniciada na origem)](https://github.com/RaryssonPereira/cpanel-email-migration/blob/main/origin/guide.md)
 
 Esses guias apresentam o passo a passo de cada etapa do processo, dicas de preparação do ambiente e instruções para garantir uma migração segura.
 
