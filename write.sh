@@ -417,7 +417,7 @@ echo -e "\n🚀 Vamos configurar a conexão com o servidor de destino para inici
 
 # Solicita os dados de conexão do servidor destino
 
-read -rp $'\n🌐 Host ou IP do servidor de destino (ex: us129.serverdo.in): ' DEST_HOST
+read -rp $'\n🌐 Host ou IP do servidor de destino (ex: us129.exemplo): ' DEST_HOST
 # Solicita ao operador que digite o **hostname ou IP do servidor destino**.
 # O valor é armazenado na variável `DEST_HOST`.
 
